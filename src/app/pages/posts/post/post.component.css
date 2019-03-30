@@ -1,0 +1,11 @@
+.delete-button {
+  float: right;
+  font-weight: normal;
+  cursor: pointer;
+  padding-top: 0.1rem;
+  color: var(--secondary);
+}
+
+.delete-button:hover {
+  color: var(--danger);
+}

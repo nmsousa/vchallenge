@@ -1,0 +1,26 @@
+<div class="card" [style.margin-bottom.rem]="1">
+
+  <div class="card-header">
+
+    <!-- New Badge -->
+    <div class="float-left">
+        <span class="badge badge-success">New</span>
+    </div>
+
+    <!-- Delete Icon -->
+    <i class="fa fa-trash-alt delete-button" data-toggle="tooltip" data-placement="top" title="Delete Post"
+      (click)="deletePost()">
+    </i>
+    <!-- Date -->
+    <small class="text-muted float-right" [style.margin-right.rem]="1">
+      {{ post.postDate | timeAgo }}
+    </small>
+
+  </div>
+
+  <!-- Body -->
+  <div class="card-body">
+    <p>{{ post.body }}</p>
+  </div>
+
+</div>
