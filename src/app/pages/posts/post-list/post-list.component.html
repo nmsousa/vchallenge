@@ -12,7 +12,11 @@
   <!-- New Post -->
   <textarea autosize class="form-control" minRows="2" [(ngModel)]="newPostBody" placeholder="Type here..."></textarea>
 
-  <button class="btn btn-primary submit-btn" [disabled]="!newPostBody" (click)="addPost()">Add Post</button>
+  <div class="row">
+    <div class="col-12">
+      <button class="btn btn-primary submit-btn float-right" [disabled]="!newPostBody" (click)="addPost()">Add Post</button>
+    </div>
+  </div>
 
   <!-- Posts List -->
   <app-post *ngFor="let post of posts" [post]="post" (delete)="deletePost($event)" (edit)="editPost($event)"></app-post>
