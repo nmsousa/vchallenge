@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 
 import { Post } from '../shared/post.model';
 
@@ -7,7 +7,7 @@ import { Post } from '../shared/post.model';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnChanges {
 
   @Input() post: Post;
   @Output() delete: EventEmitter<number> = new EventEmitter();
@@ -16,10 +16,19 @@ export class PostComponent implements OnInit {
 
   deleting: boolean;
   editing: boolean;
+  bodyText: string;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.post && changes.post.currentValue) {
+      // Store the post text, so we don't work directly with the post instance
+      // and we can restore the old value if we cancel the edit
+      this.bodyText = (changes.post.currentValue as Post).body;
+    }
   }
 
   deletePost() {
@@ -41,9 +50,15 @@ export class PostComponent implements OnInit {
     }
   }
 
-  endEditPost() {
+  onConfirmEdit() {
     this.editing = false;
+    this.post.body = this.bodyText;
     this.edit.emit(this.post);
+  }
+
+  onCancelEdit() {
+    this.editing = false;
+    this.bodyText = this.post.body; // Restore the old value
   }
 
 }

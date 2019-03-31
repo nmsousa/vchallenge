@@ -1,3 +1,8 @@
+.textarea-label {
+  margin-top: 2rem;
+  margin-bottom: 0.2rem;
+}
+
 .submit-btn {
   margin-top: 0.5rem; /* Separation between the new post textarea and the post button */
   margin-bottom: 2rem; /* Separation between post button and the next post component */

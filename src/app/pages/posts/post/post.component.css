@@ -41,3 +41,14 @@
 
   resize: none; /* remove the resize handle on the bottom right */
 }
+
+/* Edit post buttons */
+
+.card-body button {
+  float: right;
+  margin-top: 0.5rem;
+}
+
+.card-body button:first-of-type {
+  margin-left: 0.5rem;
+}

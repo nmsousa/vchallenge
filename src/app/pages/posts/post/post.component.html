@@ -28,8 +28,15 @@
 
   <!-- Body -->
   <div class="card-body">
-    <textarea #bodyTextArea [readOnly]="!editing" autosize minRows="2"
+    <textarea #bodyTextArea [disabled]="!editing" autosize minRows="2"
     class="form-control" [ngClass]="{'readonly-textarea': !editing }"
-    [(ngModel)]="post.body" (blur)="endEditPost()"></textarea>
+    [(ngModel)]="bodyText"></textarea>
+
+    <!-- Edit buttons -->
+    <span *ngIf="editing">
+      <button type="button" class="btn btn-primary btn-sm" (click)="onConfirmEdit()">Edit</button>
+      <button type="button" class="btn btn-secondary btn-sm" (click)="onCancelEdit()">Cancel</button>
+    </span>
+
   </div>
 </div>
