@@ -1,7 +1,9 @@
+import { BaseEntityModel } from 'src/app/shared/models/base-entity.model';
+
 /**
  * This class represents an Employee
  */
-export class Employee {
+export class Employee extends BaseEntityModel {
 
   constructor(
     public id: number,
@@ -10,6 +12,8 @@ export class Employee {
     public role: string,
     public phone: string
   ) {
+
+    super();
   }
 
 }

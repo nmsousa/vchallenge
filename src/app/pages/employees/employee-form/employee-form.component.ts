@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { EmployeeService } from './../shared/employee.service';
 import { Employee } from './../shared/employee.model';
 
 @Component({
@@ -11,13 +12,14 @@ export class EmployeeFormComponent implements OnInit {
 
   employee: Employee = new Employee(1, 'username', 'name', 'role', 'phone');
 
-  constructor() { }
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log('cenas');
+    //this.employeeService.save(this.employee);
+    //console.log(employee);
   }
 
 

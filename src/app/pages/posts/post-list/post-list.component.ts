@@ -28,26 +28,26 @@ export class PostListComponent implements OnInit, OnDestroy {
     private employeeService: EmployeeService) { }
 
   ngOnInit() {
-    this.posts = this.postService.getPosts(true);
+    this.posts = this.postService.getAll(true);
     this.employeeNames = this.employeeService.getEmployeeNames();
     this.employeePhones = this.employeeService.getEmployeePhones();
 
     // Listen to Post list changes
-    this.subscription = this.postService.getPostsChange().subscribe(posts => {
+    this.subscription = this.postService.getRecordsChange().subscribe(posts => {
       this.posts = posts;
     });
 
     // Setup the configuration for the mentions Post textarea
     this.mentionConfig = {
       mentions: [
-          {
-              items: this.employeeNames,
-              triggerChar: '@'
-          },
-          {
-              items: this.employeePhones,
-              triggerChar: '#'
-          },
+        {
+          items: this.employeeNames,
+          triggerChar: '@'
+        },
+        {
+          items: this.employeePhones,
+          triggerChar: '#'
+        },
       ]
     };
   }
@@ -59,12 +59,12 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   deletePost(postId: number) {
-    this.postService.deletePost(postId);
+    this.postService.deleteRecord(postId);
     this.showTimedAlert('Your post was deleted with success!');
   }
 
   editPost(post: Post) {
-    this.postService.editPost(post);
+    this.postService.editRecord(post);
     this.showTimedAlert('Your post was edited with success!');
   }
 
