@@ -33,7 +33,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.employeePhones = this.employeeService.getEmployeePhones();
 
     // Listen to Post list changes
-    this.postService.getPostsChange().subscribe(posts => {
+    this.subscription = this.postService.getPostsChange().subscribe(posts => {
       this.posts = posts;
     });
 

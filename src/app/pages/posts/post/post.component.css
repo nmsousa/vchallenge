@@ -48,6 +48,7 @@
 .card-body button {
   float: right;
   margin-top: 0.5rem;
+  width: 4rem;
 }
 
 .card-body button:first-of-type {
