@@ -8,7 +8,6 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 export class ModalConfirmationComponent implements OnInit {
 
   @Input() showModal: boolean;
-
   @Output() confirm: EventEmitter<any> = new EventEmitter();
   @Output() close: EventEmitter<any> = new EventEmitter();
 

@@ -27,6 +27,9 @@ export class PostService {
    */
   private updatePosts(posts: Post[]): void {
     localStorage.setItem('posts', JSON.stringify(posts));
+
+    // Inform whoever has a list of posts that there is a new list
+    this.postsChange.next(this.sortPostsByDate(posts));
   }
 
   /**
@@ -39,11 +42,8 @@ export class PostService {
     // Adds a new post
     posts.push(new Post(this.getNextPostId(posts), new Date(), body));
 
-    // Updates the localStorage with the new Post
+    // Updates the localStorage posts
     this.updatePosts(posts);
-
-    // Inform whoever has a list of posts that there is a new list
-    this.postsChange.next(this.sortPostsByDate(posts));
   }
 
   /**
@@ -58,9 +58,16 @@ export class PostService {
 
     // Updates the localStorage with the list of the posts without the deleted one
     this.updatePosts(posts);
+  }
 
-    // Inform whoever has a list of posts that there is a new list
-    this.postsChange.next(this.sortPostsByDate(posts));
+  editPost(post: Post): void {
+    const posts: Post[] = this.getPosts().map(postItem => {
+      // Loop though the posts and replace the one with the same id we passing
+      return postItem.id !== post.id ? postItem : post;
+    });
+
+    // Updates the localStorage with the list of the posts without the deleted one
+    this.updatePosts(posts);
   }
 
   /**

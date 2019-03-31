@@ -1,18 +1,12 @@
 
 <div class="container" [style.margin-top.rem]="1">
 
-  <div class="row">
-    <!-- Text area label -->
-    <div class="col-6" [style.margin-top.rem]="2">
-      What's on your mind?
-    </div>
-    <!-- Alert message -->
-    <div class="col-6 alert alert-success" role="alert" [style.visibility]="showAlert ? 'visible' : 'hidden'">
-      <span>Your post was successfully published!</span>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+  <!-- Alert message -->
+  <app-alert-message [showAlert]="showAlert" [message]="alertMessage"></app-alert-message>
+
+  <!-- Text area label -->
+  <div [style.margin-top.rem]="2">
+    What's on your mind?
   </div>
 
   <!-- New Post -->
@@ -21,6 +15,6 @@
   <button class="btn btn-primary submit-btn" [disabled]="!newPostBody" (click)="addPost()">Add Post</button>
 
   <!-- Posts List -->
-  <app-post *ngFor="let post of posts" [post]="post" (delete)="deletePost($event)"></app-post>
+  <app-post *ngFor="let post of posts" [post]="post" (delete)="deletePost($event)" (edit)="editPost($event)"></app-post>
 
 </div>

@@ -11,11 +11,13 @@ import { PostService } from '../shared/post.service';
 })
 export class PostListComponent implements OnInit, OnDestroy {
 
+  subscription: Subscription;
   posts: Post[];
   newPostBody: string;
-  subscription: Subscription;
+  alertMessage: string;
   showAlert: boolean;
   deleting: boolean;
+  timer: ReturnType<typeof setTimeout>;
 
   constructor(private postService: PostService) { }
 
@@ -32,19 +34,30 @@ export class PostListComponent implements OnInit, OnDestroy {
   addPost() {
     this.postService.addPost(this.newPostBody);
     this.newPostBody = '';
-    this.showAlert = true;
-    // Closes after 5 secs
-    setTimeout(() => {
-      this.showAlert = false;
-    }, 5000);
+    this.showTimedAlert('Your post was published with success!');
   }
 
   deletePost(postId: number) {
     this.postService.deletePost(postId);
+    this.showTimedAlert('Your post was deleted with success!');
   }
 
-  closeAlert() {
-    this.showAlert = false;
+  editPost(post: Post) {
+    this.postService.editPost(post);
+    this.showTimedAlert('Your post was edited with success!');
+  }
+
+  showTimedAlert(message: string) {
+    this.alertMessage = message;
+    this.showAlert = true;
+    // Stop the timer is it's already running
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    // Closes after 4 secs
+    this.timer = setTimeout(() => {
+      this.showAlert = false;
+    }, 3000);
   }
 
   ngOnDestroy() {

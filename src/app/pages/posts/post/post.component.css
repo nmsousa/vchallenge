@@ -1,11 +1,29 @@
-.delete-button {
+.new-badge {
+  margin-right: 1rem;
+  float: left;
+}
+
+/* Comon icon style */
+.icon-button {
   float: right;
   font-weight: normal;
   cursor: pointer;
   padding-top: 0.1rem;
+}
+
+.delete-button {
   color: var(--secondary);
 }
 
 .delete-button:hover {
   color: var(--danger);
+}
+
+.edit-button {
+  margin-right: 1rem;
+  color: var(--secondary);
+}
+
+.edit-button:hover {
+  color: var(--success);
 }
