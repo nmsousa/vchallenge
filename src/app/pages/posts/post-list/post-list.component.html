@@ -10,7 +10,9 @@
   </div>
 
   <!-- New Post -->
-  <textarea autosize class="form-control" minRows="2" [(ngModel)]="newPostBody" placeholder="Type here..."></textarea>
+  <textarea autosize class="form-control"[(ngModel)]="newPostBody" [mentionConfig]="mentionConfig">
+    placeholder="Type here..." minRows="2" >
+  </textarea>
 
   <div class="row">
     <div class="col-12">

@@ -22,15 +22,17 @@
 
     <!-- Edit -->
     <i class="fa fa-edit icon-button edit-button" (click)="startEditPost()"
-    data-toggle="tooltip" data-placement="top" title="Edit this post"></i>
+      data-toggle="tooltip" data-placement="top" title="Edit this post">
+    </i>
 
   </div>
 
   <!-- Body -->
   <div class="card-body">
     <textarea #bodyTextArea [disabled]="!editing" autosize minRows="2"
-    class="form-control" [ngClass]="{'readonly-textarea': !editing }"
-    [(ngModel)]="bodyText"></textarea>
+      class="form-control" [ngClass]="{'readonly-textarea': !editing }"
+      [(ngModel)]="bodyText">
+    </textarea>
 
     <!-- Edit buttons -->
     <span *ngIf="editing">

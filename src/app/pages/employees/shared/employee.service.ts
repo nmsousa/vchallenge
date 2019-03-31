@@ -6,4 +6,13 @@ import { Injectable } from '@angular/core';
 export class EmployeeService {
 
   constructor() { }
+
+  getEmployeeNames(): string[] {
+    return ['aaa', 'bbb'];
+  }
+
+  getEmployeePhones(): string[] {
+    return ['1234', '44556'];
+  }
+
 }

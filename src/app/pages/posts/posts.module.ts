@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { AutosizeModule } from 'ngx-autosize';
+import { MentionModule } from 'angular-mentions/mention';
 import { PostComponent } from './post/post.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { ModalConfirmationComponent } from './../../shared/components/modal-confirmation/modal-confirmation.component';
@@ -20,7 +21,8 @@ import { AlertMessageComponent } from './../../shared/components/alert-message/a
   imports: [
     CommonModule,
     FormsModule,
-    AutosizeModule
+    AutosizeModule,
+    MentionModule
   ]
 })
 export class PostsModule { }

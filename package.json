@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "angular-mentions": "^0.9.1",
     "core-js": "^2.5.4",
     "ngx-autosize": "^1.6.0",
     "rxjs": "~6.3.3",

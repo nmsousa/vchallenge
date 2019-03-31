@@ -28,6 +28,7 @@
   color: var(--success);
 }
 
+/* To make a textarea look like a label */
 .readonly-textarea, .readonly-textarea:focus {
   background: #FFFFFF;
   border: none;
