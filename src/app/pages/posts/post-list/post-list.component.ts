@@ -14,13 +14,16 @@ export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[];
   newPostBody: string;
   subscription: Subscription;
+  showAlert: boolean;
+  deleting: boolean;
 
   constructor(private postService: PostService) { }
 
   ngOnInit() {
-    // The the Posts
+    // Get the Posts
     this.posts = this.postService.getPosts(true);
 
+    // Listen to Post list changes
     this.postService.getPostsChange().subscribe(posts => {
       this.posts = posts;
     });
@@ -29,10 +32,19 @@ export class PostListComponent implements OnInit, OnDestroy {
   addPost() {
     this.postService.addPost(this.newPostBody);
     this.newPostBody = '';
+    this.showAlert = true;
+    // Closes after 5 secs
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 5000);
   }
 
   deletePost(postId: number) {
     this.postService.deletePost(postId);
+  }
+
+  closeAlert() {
+    this.showAlert = false;
   }
 
   ngOnDestroy() {

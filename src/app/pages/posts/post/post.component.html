@@ -1,26 +1,27 @@
+
+<!-- Delete confirmation modal -->
+<app-modal-confirmation [showModal]="deleting" (confirm)="deletePost()" (close)="deleting = false;"></app-modal-confirmation>
+
 <div class="card" [style.margin-bottom.rem]="1">
-
   <div class="card-header">
-
     <!-- New Badge -->
-    <div class="float-left">
-        <span class="badge badge-success">New</span>
+    <div class="float-left" *ngIf="isNewPost(post)"
+      data-toggle="tooltip" data-placement="top" title="This Post was created less than 5 seconds ago">
+      <span class="badge badge-success">New</span>
     </div>
 
     <!-- Delete Icon -->
-    <i class="fa fa-trash-alt delete-button" data-toggle="tooltip" data-placement="top" title="Delete Post"
-      (click)="deletePost()">
+    <i class="fa fa-trash-alt delete-button" (click)="deleting = true;"
+      data-toggle="tooltip" data-placement="top" title="Delete Post">
     </i>
     <!-- Date -->
     <small class="text-muted float-right" [style.margin-right.rem]="1">
       {{ post.postDate | timeAgo }}
     </small>
-
   </div>
 
   <!-- Body -->
   <div class="card-body">
     <p>{{ post.body }}</p>
   </div>
-
 </div>

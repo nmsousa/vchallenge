@@ -13,6 +13,7 @@ export class PostComponent implements OnInit {
 
   @Output() delete: EventEmitter<number> = new EventEmitter();
 
+  deleting: boolean;
 
   constructor() { }
 
@@ -21,6 +22,12 @@ export class PostComponent implements OnInit {
 
   deletePost() {
     this.delete.emit(this.post.id);
+  }
+
+  // Only posts that are less than 5 secs are considered new
+  isNewPost(post: Post) {
+    // Not so efficient, but cool feature :)
+    return Math.round(Math.abs(((new Date()).getTime() - new Date(post.postDate).getTime()) / 1000)) < 5;
   }
 
 }
