@@ -33,10 +33,12 @@ export class PostComponent implements OnInit {
   }
 
   startEditPost() {
-    this.editing = true;
-    setTimeout(() => {
-      this.bodyTextArea.nativeElement.focus();
-    }, 10);
+    if (!this.editing) {
+      this.editing = true;
+      setTimeout(() => {
+        this.bodyTextArea.nativeElement.focus();
+      }, 10);
+    }
   }
 
   endEditPost() {

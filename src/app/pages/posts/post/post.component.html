@@ -11,8 +11,7 @@
     </div>
 
     <!-- Date -->
-    <small class="text-muted float-left" [style.margin-top.rem]="0.2"
-      data-toggle="tooltip" data-placement="top" title="{{ post.postDate | date:'medium' }}">
+    <small class="text-muted float-left" [style.margin-top.rem]="0.2">
       {{ post.postDate | timeAgo }}
     </small>
 
@@ -29,7 +28,8 @@
 
   <!-- Body -->
   <div class="card-body">
-    <span *ngIf="!editing">{{ post.body }}</span>
-    <textarea #bodyTextArea class="form-control" width="100%" rows="2" [(ngModel)]="post.body" (blur)="endEditPost()" *ngIf="editing"></textarea>
+    <textarea #bodyTextArea [readOnly]="!editing" autosize minRows="2"
+    class="form-control" [ngClass]="{'readonly-textarea': !editing }"
+    [(ngModel)]="post.body" (blur)="endEditPost()"></textarea>
   </div>
 </div>

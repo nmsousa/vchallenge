@@ -10,7 +10,7 @@
   </div>
 
   <!-- New Post -->
-  <textarea class="form-control" rows="2" [(ngModel)]="newPostBody" placeholder="Type here..."></textarea>
+  <textarea autosize class="form-control" minRows="2" [(ngModel)]="newPostBody" placeholder="Type here..."></textarea>
 
   <button class="btn btn-primary submit-btn" [disabled]="!newPostBody" (click)="addPost()">Add Post</button>
 
