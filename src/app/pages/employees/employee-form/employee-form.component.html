@@ -1,3 +1,48 @@
-<p>
-  employee-form works!
-</p>
+<div class="container">
+
+  <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+
+    <!-- Username -->
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" [(ngModel)]="employee.username"
+            required pattern="[\w-_]+"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone -->
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="employee.phone" required/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Name -->
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="employee.name" required/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Role -->
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" class="form-control" id="role" name="role" [(ngModel)]="employee.role" required/>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
