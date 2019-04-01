@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { EmployeeService } from './../shared/employee.service';
 import { Employee } from './../shared/employee.model';
@@ -10,17 +10,17 @@ import { Employee } from './../shared/employee.model';
 })
 export class EmployeeFormComponent implements OnInit {
 
-  employee: Employee = new Employee(1, 'username', 'name', 'role', 'phone');
+  @Input() employee: Employee;
 
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
+    this.employee = new Employee();
   }
 
   onSubmit() {
-    //this.employeeService.save(this.employee);
-    //console.log(employee);
+    this.employeeService.addRecord(this.employee);
+    this.employee = new Employee();
   }
-
 
 }

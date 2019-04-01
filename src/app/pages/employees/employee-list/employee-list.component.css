@@ -1,0 +1,7 @@
+.table-hover tbody tr:hover {
+  background-color: var(--info);
+}
+
+.table button {
+  width: 2rem;
+}

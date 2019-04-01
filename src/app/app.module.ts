@@ -5,10 +5,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { EmployeesModule } from './pages/employees/employees.module';
 import { PostsModule } from './pages/posts/posts.module';
+import { AlertMessageComponent } from './shared/components/alert-message/alert-message.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AlertMessageComponent
   ],
   imports: [
     BrowserModule,

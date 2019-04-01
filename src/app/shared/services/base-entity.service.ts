@@ -87,7 +87,7 @@ export abstract class BaseEntityService<T extends BaseEntityModel> {
   private getNextRecordId(): number {
     const records: T[] = this.getAll();
 
-    if (records) {
+    if (records && records.length > 0) {
       return Math.max(...records.map(record => record.id)) + 1;
     }
 

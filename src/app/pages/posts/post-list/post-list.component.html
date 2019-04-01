@@ -1,16 +1,13 @@
 
 <div class="container" [style.margin-top.rem]="1">
 
-  <!-- Alert message -->
-  <app-alert-message [showAlert]="showAlert" [message]="alertMessage"></app-alert-message>
-
   <!-- Text area label -->
   <div class="textarea-label">
     What's on your mind?
   </div>
 
   <!-- New Post -->
-  <textarea autosize class="form-control"[(ngModel)]="newPostBody" [mentionConfig]="mentionConfig"
+  <textarea autosize class="form-control" [(ngModel)]="newPostBody" [mentionConfig]="mentionConfig"
     placeholder="Type here..." minRows="2" >
   </textarea>
 

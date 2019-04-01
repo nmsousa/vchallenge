@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Post } from './../shared/post.model';
 import { PostService } from '../shared/post.service';
 import { EmployeeService } from './../../employees/shared/employee.service';
+import { AlertService } from './../../../shared/components/alert-message/alert.service';
 
 @Component({
   selector: 'app-post-list',
@@ -18,14 +19,14 @@ export class PostListComponent implements OnInit, OnDestroy {
   alertMessage: string;
   showAlert: boolean;
   deleting: boolean;
-  timer: ReturnType<typeof setTimeout>;
   employeeNames: string[];
   employeePhones: string[];
   mentionConfig = {};
 
   constructor(
     private postService: PostService,
-    private employeeService: EmployeeService) { }
+    private employeeService: EmployeeService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.posts = this.postService.getAll(true);
@@ -55,31 +56,17 @@ export class PostListComponent implements OnInit, OnDestroy {
   addPost() {
     this.postService.addPost(this.newPostBody);
     this.newPostBody = '';
-    this.showTimedAlert('Your post was published with success!');
+    this.alertService.showMessage('Your post was published with success!');
   }
 
   deletePost(postId: number) {
     this.postService.deleteRecord(postId);
-    this.showTimedAlert('Your post was deleted with success!');
+    this.alertService.showMessage('Your post was deleted with success!');
   }
 
   editPost(post: Post) {
     this.postService.editRecord(post);
-    this.showTimedAlert('Your post was edited with success!');
-  }
-
-  showTimedAlert(message: string) {
-    this.alertMessage = message;
-    this.showAlert = true;
-    // Stop the timer is it's already running
-    // So every alert will be open for the full duration
-    if (this.timer) {
-      clearTimeout(this.timer);
-    }
-    // Closes after 4 secs
-    this.timer = setTimeout(() => {
-      this.showAlert = false;
-    }, 3000);
+    this.alertService.showMessage('Your post was edited with success!');
   }
 
   ngOnDestroy() {

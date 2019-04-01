@@ -8,15 +8,13 @@ import { MentionModule } from 'angular-mentions/mention';
 import { PostComponent } from './post/post.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { ModalConfirmationComponent } from './../../shared/components/modal-confirmation/modal-confirmation.component';
-import { AlertMessageComponent } from './../../shared/components/alert-message/alert-message.component';
 
 @NgModule({
   declarations: [
     TimeAgoPipe,
     PostComponent,
     PostListComponent,
-    ModalConfirmationComponent,
-    AlertMessageComponent
+    ModalConfirmationComponent
   ],
   imports: [
     CommonModule,

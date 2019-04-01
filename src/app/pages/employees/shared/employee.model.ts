@@ -6,11 +6,11 @@ import { BaseEntityModel } from 'src/app/shared/models/base-entity.model';
 export class Employee extends BaseEntityModel {
 
   constructor(
-    public id: number,
-    public username: string,
-    public name: string,
-    public role: string,
-    public phone: string
+    public id?: number,
+    public username?: string,
+    public name?: string,
+    public role?: string,
+    public phone?: string
   ) {
 
     super();
