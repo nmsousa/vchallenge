@@ -7,7 +7,12 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 })
 export class ModalConfirmationComponent implements OnInit {
 
-  @Input() showModal: boolean;
+  @Input() visible: boolean;
+  @Input() delete: boolean;
+  @Input() invalid: boolean;; // To disable the confirm button
+  @Input() title: string;
+  @Input() confirmLabel: string;
+
   @Output() confirm: EventEmitter<any> = new EventEmitter();
   @Output() close: EventEmitter<any> = new EventEmitter();
 
@@ -21,8 +26,8 @@ export class ModalConfirmationComponent implements OnInit {
   }
 
   onClose() {
-    this.showModal = false;
     this.close.emit();
+    this.visible = false;
   }
 
 }

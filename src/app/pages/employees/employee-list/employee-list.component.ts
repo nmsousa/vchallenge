@@ -15,6 +15,7 @@ export class EmployeeListComponent implements OnInit {
   subscription: Subscription;
   employees: Employee[];
   selectedEmployee: Employee;
+  showModal: boolean;
 
   constructor(
     private employeeService: EmployeeService,
@@ -31,10 +32,12 @@ export class EmployeeListComponent implements OnInit {
 
   createEmployee() {
     this.selectedEmployee = new Employee();
+    this.showModal = true;
   }
 
   onEditEmployee(employee: Employee) {
-    this.selectedEmployee = employee;
+    this.selectedEmployee = Object.assign({}, employee); // Clone to avoid changing the original instance
+    this.showModal = true;
   }
 
   onDeleteEmployee(employee: Employee) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { EmployeeService } from './../shared/employee.service';
 import { AlertService } from './../../../shared/components/alert-message/alert.service';
@@ -11,7 +11,10 @@ import { Employee } from './../shared/employee.model';
 })
 export class EmployeeFormComponent implements OnInit {
 
+  @Input() visible: boolean;
+  @Input() formTitle: string;
   @Input() employee: Employee;
+  @Output() close: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private employeeService: EmployeeService,
@@ -21,7 +24,7 @@ export class EmployeeFormComponent implements OnInit {
     this.employee = new Employee();
   }
 
-  onSubmit() {
+  confirmEdit() {
     if (!this.employee.id) {
       if (this.employeeService.addRecord(this.employee)) {
         this.alertService.showMessage('Employee created with success!');
@@ -31,6 +34,12 @@ export class EmployeeFormComponent implements OnInit {
         this.alertService.showMessage('Employee edited with success!');
       }
     }
+
+    this.close.emit();
+  }
+
+  cancelEdit() {
+    this.close.emit();
   }
 
 }

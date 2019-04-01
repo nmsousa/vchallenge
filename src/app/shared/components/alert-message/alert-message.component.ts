@@ -24,7 +24,7 @@ export class AlertMessageComponent implements OnInit, OnDestroy {
       this.message = message.message;
       this.isSuccess = message.success;
       this.showTimedAlert();
-    })
+    });
   }
 
   showTimedAlert() {

@@ -1,58 +1,60 @@
-<div class="container">
+<!-- Delete confirmation modal -->
+<app-modal-confirmation (confirm)="confirmEdit()" (close)="cancelEdit()" [visible]="visible"
+  title="{{ employee.id ? 'Edit' : 'Create' }} Employee" [confirmLabel]="'Save'" [invalid]="!employeeForm.valid">
 
-  <form (ngSubmit)="onSubmit()" #employeeForm="ngForm" (keydown.enter)="$event.preventDefault()">
+  <span class="body-content">
+    <div class="container">
 
-    <!-- Id -->
-    <div class="row">
-      <div class="col-12">
-        <div class="form-group">
-          <label for="id">Id</label>
-          <input type="text" class="form-control" id="id" name="id" [(ngModel)]="employee.id" readonly/>
+      <form #employeeForm="ngForm" (keydown.enter)="$event.preventDefault()">
+
+        <!-- Id (Only visible while editing an existing employee) -->
+        <div class="row" *ngIf="employee.id">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="id">Id</label>
+              <input type="text" class="form-control" id="id" name="id" [(ngModel)]="employee.id" readonly/>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Username -->
-    <div class="row">
-      <div class="col-12">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" name="username" [(ngModel)]="employee.username"
-            required pattern="[\w-_]+"/>
+        <!-- Username -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" name="username" [(ngModel)]="employee.username"
+                required pattern="[\w-_]+" maxlength="20"/>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Phone -->
-    <div class="row">
-      <div class="col-12">
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="employee.phone" required/>
+        <!-- Phone -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="employee.phone" required maxlength="20"/>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Name -->
-    <div class="row">
-      <div class="col-12">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="employee.name" required/>
+        <!-- Role -->
+        <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="role">Role</label>
+                <input type="text" class="form-control" id="role" name="role" [(ngModel)]="employee.role" required maxlength="20"/>
+              </div>
+            </div>
+          </div>
+        <!-- Name -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="employee.name" required maxlength="30"/>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Role -->
-    <div class="row">
-      <div class="col-12">
-        <div class="form-group">
-          <label for="role">Role</label>
-          <input type="text" class="form-control" id="role" name="role" [(ngModel)]="employee.role" required/>
-        </div>
-      </div>
+      </form>
     </div>
-
-    <button type="submit" class="btn btn-primary float-right" [disabled]="!employeeForm.valid">Save</button>
-  </form>
-</div>
+  </span>
+</app-modal-confirmation>

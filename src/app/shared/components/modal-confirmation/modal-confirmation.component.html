@@ -1,21 +1,23 @@
 
-<div class="modal" [style.display]="showModal ? 'block' : 'none'" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Delete Post?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>You can edit it if you just need to change something.</p>
-          <p>Do you want to delete anyway?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="onClose()">Cancel</button>
-          <button type="button" class="btn btn-danger btn-sm" (click)="onConfirm()">Delete</button>
-        </div>
+<div class="modal" [style.display]="visible ? 'block' : 'none'" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">{{ title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- Body -->
+      <div class="modal-body">
+        <ng-content class="body-content"></ng-content>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="onClose()">Cancel</button>
+        <button type="button" class="btn btn-sm" [ngClass]="delete ? 'btn-danger' : 'btn-primary'" (click)="onConfirm()" [disabled]="invalid">{{ confirmLabel }}</button>
       </div>
     </div>
   </div>
+</div>

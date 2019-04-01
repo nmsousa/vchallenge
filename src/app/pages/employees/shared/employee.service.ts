@@ -52,16 +52,16 @@ export class EmployeeService extends BaseEntityService<Employee> {
   }
 
   /**
-   * Order the posts by date descending
-   * @param posts Employees to be ordered
+   * Order the employees by id descending
+   * @param employees Employees to be ordered
    */
-  protected sortRecords(posts: Employee[]): Employee[] {
-    if (posts) {
-      return posts.sort((a, b) => {
-        if (a.name > b.name) {
+  protected sortRecords(employees: Employee[]): Employee[] {
+    if (employees) {
+      return employees.sort((a, b) => {
+        if (a.id < b.id) {
           return 1;
         }
-        if (a.name < b.name) {
+        if (a.id > b.id) {
           return -1;
         }
         // a must be equal to b

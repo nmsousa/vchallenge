@@ -5,22 +5,22 @@ import { FormsModule } from '@angular/forms';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { AutosizeModule } from 'ngx-autosize';
 import { MentionModule } from 'angular-mentions/mention';
+import { SharedModule } from './../../shared/shared.module';
 import { PostComponent } from './post/post.component';
 import { PostListComponent } from './post-list/post-list.component';
-import { ModalConfirmationComponent } from './../../shared/components/modal-confirmation/modal-confirmation.component';
 
 @NgModule({
   declarations: [
     TimeAgoPipe,
     PostComponent,
-    PostListComponent,
-    ModalConfirmationComponent
+    PostListComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     AutosizeModule,
-    MentionModule
+    MentionModule,
+    SharedModule
   ]
 })
 export class PostsModule { }

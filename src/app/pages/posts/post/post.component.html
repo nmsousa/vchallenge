@@ -1,6 +1,12 @@
 
 <!-- Delete confirmation modal -->
-<app-modal-confirmation [showModal]="deleting" (confirm)="deletePost()" (close)="deleting = false;"></app-modal-confirmation>
+<app-modal-confirmation (confirm)="deletePost()" (close)="deleting = false"
+  [visible]="deleting" [title]="'Delete Post?'" [confirmLabel]="'Delete'" [delete]="true">
+  <span class="body-content">
+    <p>You can edit it if you just need to change something.</p>
+    <p>Do you want to delete anyway?</p>
+  </span>
+</app-modal-confirmation>
 
 <div class="card" [style.margin-bottom.rem]="1">
   <div class="card-header">
@@ -16,7 +22,7 @@
     </small>
 
     <!-- Delete Icon -->
-    <i class="fa fa-trash-alt icon-button delete-button" (click)="deleting = true;"
+    <i class="fa fa-trash-alt icon-button delete-button" (click)="deleting = true"
       data-toggle="tooltip" data-placement="top" title="Delete this post">
     </i>
 
