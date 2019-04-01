@@ -31,7 +31,7 @@ export abstract class BaseEntityService<T extends BaseEntityModel> {
    * Adds a new record
    * @param record Record to add
    */
-  public addRecord(record: T): void {
+  public addRecord(record: T): boolean {
     record.id = this.getNextRecordId(); // Fill the id
     const records: T[] = this.getAll();
 
@@ -39,13 +39,15 @@ export abstract class BaseEntityService<T extends BaseEntityModel> {
 
     // Updates the localStorage records with the new record
     this.updateRecords(records);
+
+    return true;
   }
 
   /**
    * Edits an existing record
    * @param record Record to be edited
    */
-  public editRecord(record: T): void {
+  public editRecord(record: T): boolean {
     const records: T[] = this.getAll().map(recordItem => {
       // Loop though the records and replace the one with the same id we passing
       return recordItem.id !== record.id ? recordItem : record;
@@ -53,13 +55,15 @@ export abstract class BaseEntityService<T extends BaseEntityModel> {
 
     // Updates the localStorage with the list of the records without the deleted one
     this.updateRecords(records);
+
+    return true;
   }
 
   /**
    * Deletes a record by its Id
    * @param recordId Identifies the record to be deleted
    */
-  public deleteRecord(recordId: number): void {
+  public deleteRecord(recordId: number): boolean {
     // Get all the records but the one we want to delete
     const records: T[] = this.getAll().filter(record => {
       return record.id !== recordId;
@@ -67,6 +71,8 @@ export abstract class BaseEntityService<T extends BaseEntityModel> {
 
     // Updates the localStorage with the list of the records without the deleted one
     this.updateRecords(records);
+
+    return true;
   }
 
   /**

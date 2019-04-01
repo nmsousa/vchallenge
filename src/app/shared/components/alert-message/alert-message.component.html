@@ -1,4 +1,4 @@
-<div class="alert alert-success alert-message" role="alert" [style.visibility]="showAlert ? 'visible' : 'hidden'">
+<div class="alert alert-message" [ngClass]="isSuccess ? 'alert-success' : 'alert-danger'" role="alert" [style.visibility]="showAlert ? 'visible' : 'hidden'">
   <span [style.margin-right.rem]="1">{{ message }}</span>
   <button type="button" class="close" (click)="closeAlert()">
       <span class="alert-icon-close">&times;</span>

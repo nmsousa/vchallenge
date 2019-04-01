@@ -13,6 +13,7 @@ export class AlertMessageComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   showAlert: boolean;
   message: string;
+  isSuccess: boolean;
   timer: ReturnType<typeof setTimeout>;
 
   constructor(private alertService: AlertService) { }
@@ -20,7 +21,8 @@ export class AlertMessageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Waiting for broadcasted messages
     this.alertService.getMessageBroadcaster().subscribe(message => {
-      this.message = message;
+      this.message = message.message;
+      this.isSuccess = message.success;
       this.showTimedAlert();
     })
   }

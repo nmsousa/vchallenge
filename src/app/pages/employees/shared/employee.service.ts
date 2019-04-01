@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { AlertService } from './../../../shared/components/alert-message/alert.service';
 import { BaseEntityService } from 'src/app/shared/services/base-entity.service';
 import { Employee } from './employee.model';
 
@@ -8,7 +9,7 @@ import { Employee } from './employee.model';
 })
 export class EmployeeService extends BaseEntityService<Employee> {
 
-  constructor() {
+  constructor(private alertService: AlertService) {
     super();
   }
 
@@ -16,12 +17,38 @@ export class EmployeeService extends BaseEntityService<Employee> {
     return 'employees';
   }
 
-  getEmployeeNames(): string[] {
-    return ['aaa', 'bbb'];
+  public getEmployeeNames(): string[] {
+    return this.getAll().map(employee => {
+      return employee.name;
+    });
   }
 
-  getEmployeePhones(): string[] {
-    return ['1234', '44556'];
+  public getEmployeePhones(): string[] {
+    return this.getAll().map(employee => {
+      return employee.phone;
+    });
+  }
+
+  public addRecord(employee: Employee): boolean {
+    // If there is no other employ
+    if (!this.getAll().some(e => e.phone === employee.phone)) {
+      return super.addRecord(employee);
+    } else {
+      this.alertService.showErrorMessage('This phone number is already in use!');
+    }
+
+    return false;
+  }
+
+  public editRecord(employee: Employee): boolean {
+    // If there is no other employ
+    if (!this.getAll().some(e => e.phone === employee.phone && e.id !== employee.id)) {
+      return super.editRecord(employee);
+    } else {
+      this.alertService.showErrorMessage('This phone number is already in use!');
+    }
+
+    return false;
   }
 
   /**

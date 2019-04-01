@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
 
 import { Subject, Observable } from 'rxjs';
+import { AlertMessage } from './alert-message.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
 
-  messageReceiver = new Subject<string>();
+  messageBroadcaster = new Subject<AlertMessage>();
 
   constructor() { }
 
-  getMessageBroadcaster(): Observable<string> {
-    return this.messageReceiver.asObservable();
+  getMessageBroadcaster(): Observable<AlertMessage> {
+    return this.messageBroadcaster.asObservable();
   }
 
   showMessage(message: string): void {
-    this.messageReceiver.next(message);
+    this.messageBroadcaster.next(new AlertMessage(message));
+  }
+
+  showErrorMessage(message: string): void {
+    this.messageBroadcaster.next(new AlertMessage(message, false));
   }
 
 }

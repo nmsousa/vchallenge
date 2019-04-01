@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Employee } from './../shared/employee.model';
 import { EmployeeService } from './../shared/employee.service';
+import { AlertService } from './../../../shared/components/alert-message/alert.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,8 +14,11 @@ export class EmployeeListComponent implements OnInit {
 
   subscription: Subscription;
   employees: Employee[];
+  selectedEmployee: Employee;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(
+    private employeeService: EmployeeService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.employees = this.employeeService.getAll(true);
@@ -25,12 +29,17 @@ export class EmployeeListComponent implements OnInit {
     });
   }
 
-  onEdit() {
-
+  createEmployee() {
+    this.selectedEmployee = new Employee();
   }
 
-  onDelete() {
+  onEditEmployee(employee: Employee) {
+    this.selectedEmployee = employee;
+  }
 
+  onDeleteEmployee(employee: Employee) {
+    this.employeeService.deleteRecord(employee.id);
+    this.alertService.showMessage('Employee deleted with success!');
   }
 
 }
