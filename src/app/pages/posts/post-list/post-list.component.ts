@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 import { Post } from './../shared/post.model';
+import { Employee } from './../../employees/shared/employee.model';
 import { PostService } from '../shared/post.service';
 import { EmployeeService } from './../../employees/shared/employee.service';
 import { AlertService } from './../../../shared/components/alert-message/alert.service';
@@ -19,8 +20,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   alertMessage: string;
   showAlert: boolean;
   deleting: boolean;
-  employeeNames: string[];
-  employeePhones: string[];
+  employees: Employee[];
   mentionConfig = {};
 
   constructor(
@@ -30,8 +30,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.posts = this.postService.getAll(true);
-    this.employeeNames = this.employeeService.getEmployeeNames();
-    this.employeePhones = this.employeeService.getEmployeePhones();
+    this.employees = this.employeeService.getAll();
 
     // Listen to Post list changes
     this.subscription = this.postService.getRecordsChange().subscribe(posts => {
@@ -42,12 +41,20 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.mentionConfig = {
       mentions: [
         {
-          items: this.employeeNames,
-          triggerChar: '@'
+          items: this.employees,
+          triggerChar: '@',
+          labelKey: 'name',
+          mentionSelect: (item) => {
+            return item.name; // `<employee id="${item.id}" field="username">${item.name}</employee>`;
+          }
         },
         {
-          items: this.employeePhones,
-          triggerChar: '#'
+          items: this.employees,
+          triggerChar: '#',
+          labelKey: 'phone',
+          mentionSelect: (item) => {
+            return item.phone; // `<employee id="${item.id}" field="phone">${item.phone}</employee>`;
+          }
         },
       ]
     };

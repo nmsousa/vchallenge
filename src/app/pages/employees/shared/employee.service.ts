@@ -17,18 +17,6 @@ export class EmployeeService extends BaseEntityService<Employee> {
     return 'employees';
   }
 
-  public getEmployeeNames(): string[] {
-    return this.getAll().map(employee => {
-      return employee.name;
-    });
-  }
-
-  public getEmployeePhones(): string[] {
-    return this.getAll().map(employee => {
-      return employee.phone;
-    });
-  }
-
   public addRecord(employee: Employee): boolean {
     // If there is no other employ
     if (!this.getAll().some(e => e.phone === employee.phone)) {
