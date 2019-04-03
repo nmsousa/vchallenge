@@ -43,18 +43,12 @@ export class PostListComponent implements OnInit, OnDestroy {
         {
           items: this.employees,
           triggerChar: '@',
-          labelKey: 'name',
-          mentionSelect: (item) => {
-            return item.name; // `<employee id="${item.id}" field="username">${item.name}</employee>`;
-          }
+          labelKey: 'username'
         },
         {
           items: this.employees,
           triggerChar: '#',
-          labelKey: 'phone',
-          mentionSelect: (item) => {
-            return item.phone; // `<employee id="${item.id}" field="phone">${item.phone}</employee>`;
-          }
+          labelKey: 'phone'
         },
       ]
     };

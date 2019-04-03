@@ -17,9 +17,25 @@ export class EmployeeService extends BaseEntityService<Employee> {
     return 'employees';
   }
 
+  public getEmployeeByUsername(username: string): Employee {
+    const employees: Employee[] = this.getAll().filter(employee => {
+      return employee.username === username;
+    });
+
+    return (employees && employees.length > 0) ? employees[0] : null;
+  }
+
+  public getEmployeeByPhone(phone: string): Employee {
+    const employees: Employee[] = this.getAll().filter(employee => {
+      return employee.phone === phone;
+    });
+
+    return (employees && employees.length > 0) ? employees[0] : null;
+  }
+
   public addRecord(employee: Employee): boolean {
-    // If there is no other employ
-    if (!this.getAll().some(e => e.phone === employee.phone)) {
+    // If there is no other employee with the same phone or username
+    if (!this.getAll().some(e => e.phone === employee.phone || e.username === employee.username)) {
       return super.addRecord(employee);
     } else {
       this.alertService.showErrorMessage('This phone number is already in use!');
@@ -29,8 +45,8 @@ export class EmployeeService extends BaseEntityService<Employee> {
   }
 
   public editRecord(employee: Employee): boolean {
-    // If there is no other employ
-    if (!this.getAll().some(e => e.phone === employee.phone && e.id !== employee.id)) {
+    // If there is no other employee with the same phone or username
+    if (!this.getAll().some(e => (e.phone === employee.phone || e.username === employee.username) && e.id !== employee.id)) {
       return super.editRecord(employee);
     } else {
       this.alertService.showErrorMessage('This phone number is already in use!');

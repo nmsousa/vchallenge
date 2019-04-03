@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 
+import { EmployeeService } from './../../employees/shared/employee.service';
+import { Employee } from './../../employees/shared/employee.model';
 import { Post } from '../shared/post.model';
 
 @Component({
@@ -18,7 +20,7 @@ export class PostComponent implements OnInit, OnChanges {
   editing: boolean;
   bodyText: string;
 
-  constructor() { }
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
   }
@@ -28,6 +30,31 @@ export class PostComponent implements OnInit, OnChanges {
       // Store the post text, so we don't work directly with the post instance
       // and we can restore the old value if we cancel the edit
       this.bodyText = (changes.post.currentValue as Post).body;
+
+      // Replace the @usernames for the custom HTML element with tooltip
+      const usernames: string[] = this.bodyText.match(/\s([@][\w_-]+)/g);
+      if (usernames && usernames.length > 0) {
+        usernames.forEach(username => {
+          const employee: Employee = this.employeeService.getEmployeeByUsername(username.split('@')[1]);
+          if (employee) {
+            this.bodyText = this.bodyText.replace(username, `<span class="text-info" data-toggle="tooltip"
+            data-placement="top" title="${employee.name} - ${employee.role} (${employee.phone})">${username}</span>`);
+          }
+        });
+      }
+
+      // Replace the @phones for the custom HTML element with tooltip
+      const phones: string[] = this.bodyText.match(/\s([#][\w_-]+)/g);
+      if (phones && phones.length > 0) {
+        phones.forEach(phone => {
+          const employee: Employee = this.employeeService.getEmployeeByPhone(phone.split('#')[1]);
+          if (employee) {
+            this.bodyText = this.bodyText.replace(phone, `<span class="text-info" data-toggle="tooltip"
+            data-placement="top" title="${employee.name} - ${employee.role} (${employee.phone})">${phone}</span>`);
+          }
+        });
+      }
+
     }
   }
 

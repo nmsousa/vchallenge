@@ -17,7 +17,7 @@ export abstract class BaseEntityService<T extends BaseEntityModel> {
   public getAll(sort?: boolean): T[] {
     return sort ?
       this.sortRecords(JSON.parse(localStorage.getItem(this.localStorageKey())) || []) :
-      JSON.parse(localStorage.getItem(this.localStorageKey())) || [];
+      (JSON.parse(localStorage.getItem(this.localStorageKey())) || []);
   }
 
   /**

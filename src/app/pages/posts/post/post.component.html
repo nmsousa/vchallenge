@@ -35,14 +35,20 @@
 
   <!-- Body -->
   <div class="card-body">
-    <textarea #bodyTextArea [disabled]="!editing" autosize minRows="2"
+
+    <!-- Edit -->
+    <textarea #bodyTextArea *ngIf="editing" autosize minRows="2"
       class="form-control" [ngClass]="{'readonly-textarea': !editing }"
       [(ngModel)]="bodyText">
     </textarea>
 
+    <!-- Read -->
+    <span class="form-control" *ngIf="!editing" [innerHTML]="bodyText" style="min-height:80px; height: 100%"
+    [ngClass]="{'readonly-textarea': !editing }"></span>
+
     <!-- Edit buttons -->
     <span *ngIf="editing">
-      <button type="button" class="btn btn-primary btn-sm" (click)="onConfirmEdit()">Edit</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="onConfirmEdit()">Save</button>
       <button type="button" class="btn btn-secondary btn-sm" (click)="onCancelEdit()">Cancel</button>
     </span>
 
