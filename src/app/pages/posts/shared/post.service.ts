@@ -38,4 +38,26 @@ export class PostService extends BaseEntityService<Post> {
     return [];
   }
 
+  public updatePostsEmployeeInfo(changedEmployeeFields: any) {
+    const posts: Post[] = this.getAll();
+
+    posts.map(post => {
+      // @username has changed
+      if (changedEmployeeFields.username.old) {
+        if (post.body.includes(changedEmployeeFields.username.old)) {
+          post.body = post.body.replace(changedEmployeeFields.username.old, changedEmployeeFields.username.new);
+        }
+      }
+      // #phone has changed
+      if (changedEmployeeFields.phone.old) {
+        if (post.body.includes(changedEmployeeFields.phone.old)) {
+          post.body = post.body.replace(changedEmployeeFields.phone.old, changedEmployeeFields.phone.new);
+        }
+      }
+    });
+
+    this.updateRecords(posts);
+
+  }
+
 }

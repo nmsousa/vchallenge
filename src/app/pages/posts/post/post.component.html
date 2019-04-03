@@ -38,13 +38,12 @@
 
     <!-- Edit -->
     <textarea #bodyTextArea *ngIf="editing" autosize minRows="2"
-      class="form-control" [ngClass]="{'readonly-textarea': !editing }"
+      class="form-control"
       [(ngModel)]="bodyText">
     </textarea>
 
     <!-- Read -->
-    <span class="form-control" *ngIf="!editing" [innerHTML]="bodyText" style="min-height:80px; height: 100%"
-    [ngClass]="{'readonly-textarea': !editing }"></span>
+    <span class="form-control readonly-textarea" *ngIf="!editing" [innerHTML]="bodyText"></span>
 
     <!-- Edit buttons -->
     <span *ngIf="editing">

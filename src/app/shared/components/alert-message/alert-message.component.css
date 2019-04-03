@@ -2,8 +2,8 @@
     visibility: hidden; /* Hidden by default. Visible when needed */
     position: fixed; /* Sit on top of the screen */
     z-index: 1; /* Add a z-index if needed */
-    top: 2rem; /* 2rem from the top */
-    right: 2rem; /* 2rem from the right */
+    top: 1rem; /* 1rem from the top */
+    right: 1rem; /* 1rem from the right */
 }
 
 .alert-icon-close {

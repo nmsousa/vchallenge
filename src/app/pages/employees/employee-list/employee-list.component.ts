@@ -15,7 +15,9 @@ export class EmployeeListComponent implements OnInit {
   subscription: Subscription;
   employees: Employee[];
   selectedEmployee: Employee;
+  deletingId: number;
   showModal: boolean;
+  deleting: boolean;
 
   constructor(
     private employeeService: EmployeeService,
@@ -41,8 +43,9 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onDeleteEmployee(employee: Employee) {
-    this.employeeService.deleteRecord(employee.id);
+    this.employeeService.deleteRecord(this.deletingId);
     this.alertService.showMessage('Employee deleted with success!');
+    this.deleting = false;
   }
 
 }

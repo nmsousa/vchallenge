@@ -32,7 +32,7 @@ export class PostComponent implements OnInit, OnChanges {
       this.bodyText = (changes.post.currentValue as Post).body;
 
       // Replace the @usernames for the custom HTML element with tooltip
-      const usernames: string[] = this.bodyText.match(/\s([@][\w_-]+)/g);
+      const usernames: string[] = this.bodyText.match(/([@][\w_-]+)/g);
       if (usernames && usernames.length > 0) {
         usernames.forEach(username => {
           const employee: Employee = this.employeeService.getEmployeeByUsername(username.split('@')[1]);
@@ -44,7 +44,7 @@ export class PostComponent implements OnInit, OnChanges {
       }
 
       // Replace the @phones for the custom HTML element with tooltip
-      const phones: string[] = this.bodyText.match(/\s([#][\w_-]+)/g);
+      const phones: string[] = this.bodyText.match(/([#][\w_-]+)/g);
       if (phones && phones.length > 0) {
         phones.forEach(phone => {
           const employee: Employee = this.employeeService.getEmployeeByPhone(phone.split('#')[1]);

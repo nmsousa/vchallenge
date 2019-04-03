@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AlertService } from './../../../shared/components/alert-message/alert.service';
 import { BaseEntityService } from 'src/app/shared/services/base-entity.service';
+import { PostService } from '../../posts/shared/post.service';
 import { Employee } from './employee.model';
 
 @Injectable({
@@ -9,7 +10,10 @@ import { Employee } from './employee.model';
 })
 export class EmployeeService extends BaseEntityService<Employee> {
 
-  constructor(private alertService: AlertService) {
+  constructor(
+    private alertService: AlertService,
+    private postService: PostService
+    ) {
     super();
   }
 
@@ -47,7 +51,40 @@ export class EmployeeService extends BaseEntityService<Employee> {
   public editRecord(employee: Employee): boolean {
     // If there is no other employee with the same phone or username
     if (!this.getAll().some(e => (e.phone === employee.phone || e.username === employee.username) && e.id !== employee.id)) {
-      return super.editRecord(employee);
+
+      // If we are editing, we check before if we changed the @username or the #phone so we can replace it in the posts
+      const oldEmployee: Employee = this.get(employee.id);
+      const changedFields: any = {
+        username: {
+          old: '',
+          new: ''
+        },
+        phone: {
+          old: '',
+          new: ''
+        }
+      };
+
+      let hasChangedFields: boolean;
+      if (employee.username !== oldEmployee.username) {
+        changedFields.username.old = oldEmployee.username;
+        changedFields.username.new = employee.username;
+        hasChangedFields = true;
+      }
+      if (employee.phone !== oldEmployee.phone) {
+        changedFields.phone.old = oldEmployee.phone;
+        changedFields.phone.new = employee.phone;
+        hasChangedFields = true;
+      }
+
+      // Update the employee
+      super.editRecord(employee);
+
+      if (hasChangedFields) {
+        this.postService.updatePostsEmployeeInfo(changedFields);
+      }
+
+      return true;
     } else {
       this.alertService.showErrorMessage('This phone number is already in use!');
     }

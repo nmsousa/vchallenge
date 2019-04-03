@@ -20,6 +20,14 @@ export abstract class BaseEntityService<T extends BaseEntityModel> {
       (JSON.parse(localStorage.getItem(this.localStorageKey())) || []);
   }
 
+  public get(recordId: number): T {
+    const recordsFromId: T[] = this.getAll().filter(record => {
+      return record.id === recordId;
+    });
+
+    return (recordsFromId && recordsFromId.length > 0) ? recordsFromId[0] : null;
+  }
+
   /**
    * Observable that will inform when the record list have been changed
    */
